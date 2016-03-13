@@ -19743,7 +19743,7 @@
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function lookupHexagramNumber(lines) {
-	  return CX.LINES_TO_NUMBER[lines.join('')];
+	  return CX.LINES_TO_NUMBERS[lines.join('')];
 	}
 
 	function divine(question) {
@@ -20002,6 +20002,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _constants = __webpack_require__(161);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var className = 'HexagramLine';
@@ -20012,10 +20014,14 @@
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'Hexagram' },
-	    'Hexagram ',
-	    number,
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'HexagramTitle' },
+	      'Hexagram ',
+	      number
+	    ),
 	    [].slice.call(lines).reverse().map(function (line, i) {
-	      return _react2.default.createElement('div', { key: i, className: className + ' ' + className + '-' + line.toLowerCase() });
+	      return _react2.default.createElement('div', { key: i, className: className + ' ' + className + '-' + (line ? 'yang' : 'yin') });
 	    })
 	  );
 	};
@@ -20055,7 +20061,7 @@
 
 
 	// module
-	exports.push([module.id, "html,\nbody {\n  width: 100%;\n  height: 100%;\n  padding: 0;\n  margin: 0;\n}\n\n* {\n  box-sizing: border-box;\n}\n\n#root {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 100%;\n  width: 100%;\n}\n\n.DiviningTable {\n  width: 50%;\n}\n\n.HexagramContainer {\n  display: flex;\n  flex: 1;\n  justify-content: center;\n  margin: 20px 0;\n}\n\n.Hexagram {\n  margin: 40px;\n  height: 100px;\n  width: 80px;\n}\n\n.HexagramLine {\n  background: #000;\n  margin-bottom: 8px;\n  height: 8px;\n  width: 90px;\n}\n\n.HexagramLine-yin:before {\n  content: '';\n  background: white;\n  display: block;\n  left: 30px;\n  position: relative;\n  height: 8px;\n  width: 30px;\n}\n\n.InputContainer {\n  width: 100%;\n}\n\n.InputContainer-Input {\n  border: 1px solid #999;\n  border-radius: 4px;\n  font-size: 18px;\n  font-family: Helvetica Neue;\n  min-height: 20px;\n  outline: none;\n  padding: 18px;\n  width: 100%;\n}\n\n.yin-yang {\n  width: 96px;\n  height: 48px;\n  background: #eee;\n  border-color: #000;\n  border-style: solid;\n  border-width: 2px 2px 50px 2px;\n  border-radius: 100%;\n  position: relative;\n}\n\n.yin-yang:before {\n  content: \"\";\n  position: absolute;\n  top: 50%;\n  left: 0;\n  background: #eee;\n  border: 18px solid #000;\n  border-radius: 100%;\n  width: 12px;\n  height: 12px;\n}\n\n.yin-yang:after {\n  content: \"\";\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  background: #000;\n  border: 18px solid #eee;\n  border-radius: 100%;\n  width: 12px;\n  height: 12px;\n}", ""]);
+	exports.push([module.id, "html,\nbody {\n  width: 100%;\n  height: 100%;\n  padding: 0;\n  margin: 0;\n}\n\n* {\n  box-sizing: border-box;\n}\n\n#root {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 100%;\n  width: 100%;\n}\n\n.DiviningTable {\n  width: 50%;\n}\n\n.HexagramContainer {\n  display: flex;\n  flex: 1;\n  justify-content: center;\n  margin: 20px 0;\n}\n\n.Hexagram {\n  margin: 40px;\n  height: 100px;\n  width: 90px;\n}\n\n.HexagramTitle {\n  margin-bottom: 8px;\n  text-align: center;\n}\n\n.HexagramLine {\n  background: #000;\n  margin-bottom: 8px;\n  height: 8px;\n  width: 90px;\n}\n\n.HexagramLine-yin:before {\n  content: '';\n  background: white;\n  display: block;\n  left: 30px;\n  position: relative;\n  height: 8px;\n  width: 30px;\n}\n\n.InputContainer {\n  width: 100%;\n}\n\n.InputContainer-Input {\n  border: 1px solid #999;\n  border-radius: 4px;\n  font-size: 18px;\n  font-family: Helvetica Neue;\n  min-height: 20px;\n  outline: none;\n  padding: 18px;\n  width: 100%;\n}\n\n.yin-yang {\n  width: 96px;\n  height: 48px;\n  background: #eee;\n  border-color: #000;\n  border-style: solid;\n  border-width: 2px 2px 50px 2px;\n  border-radius: 100%;\n  position: relative;\n}\n\n.yin-yang:before {\n  content: \"\";\n  position: absolute;\n  top: 50%;\n  left: 0;\n  background: #eee;\n  border: 18px solid #000;\n  border-radius: 100%;\n  width: 12px;\n  height: 12px;\n}\n\n.yin-yang:after {\n  content: \"\";\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  background: #000;\n  border: 18px solid #eee;\n  border-radius: 100%;\n  width: 12px;\n  height: 12px;\n}", ""]);
 
 	// exports
 
