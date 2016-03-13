@@ -1,20 +1,14 @@
-const YIN = 'YIN'
-const YANG = 'YANG'
-const MOVING_YIN = 'MOVING_YIN'
-const MOVING_YANG = 'MOVING_YANG'
-const STARTING_STICKS = 49
-const DIVINING_TABLE = {
-  13: MOVING_YANG,
-  25: MOVING_YIN,
-  21: YANG,
-  17: YIN
+import * as CX from './constants'
+
+function lookupHexagramNumber (lines) {
+  return CX.LINES_TO_NUMBERS[lines.join('')]
 }
 
 export function divine (question) {
   var hexagrams = []
   var lines = []
   while (lines.length !== 6) {
-    var sticks = STARTING_STICKS
+    var sticks = CX.STARTING_STICKS
     var count = 0
     for (var i = 0; i < 3; i++) {
       var heaps = divide(sticks)
@@ -22,13 +16,15 @@ export function divine (question) {
       count += result
       sticks -= result
     }
-    lines.push(DIVINING_TABLE[count])
+    lines.push(CX.DIVINING_TABLE[count])
   }
   if (containsMovingLines(lines)) {
-    hexagrams.push({lines: removeMovingLines(lines)})
-    hexagrams.push({lines: transformMovingLines(lines)})
+    let withoutMoving = removeMovingLines(lines)
+    let transformed = transformMovingLines(lines)
+    hexagrams.push({lines: withoutMoving, number: lookupHexagramNumber(withoutMoving)})
+    hexagrams.push({lines: transformed, number: lookupHexagramNumber(transformed)})
   } else {
-    hexagrams.push({lines})
+    hexagrams.push({lines, number: lookupHexagramNumber(lines)})
   }
   return hexagrams
 }
@@ -37,16 +33,16 @@ export function printHexagram (lines) {
   var hexagram = ''
   for (var line of [].slice.call(lines).reverse()) {
     switch (line) {
-      case YIN:
+      case CX.YIN:
         hexagram += '-- --\n'
         break
-      case MOVING_YIN:
+      case CX.MOVING_YIN:
         hexagram += '--x--\n'
         break
-      case YANG:
+      case CX.YANG:
         hexagram += '-----\n'
         break
-      case MOVING_YANG:
+      case CX.MOVING_YANG:
         hexagram += '--o--\n'
         break
       default:
@@ -72,17 +68,17 @@ function divide (sticks) {
 
 function containsMovingLines (lines) {
   return !!lines.find(function (line) {
-    return (line === MOVING_YIN || line === MOVING_YANG)
+    return (line === CX.MOVING_YIN || line === CX.MOVING_YANG)
   })
 }
 
 function removeMovingLines (lines) {
   return lines.map(function (line) {
-    if (line === MOVING_YIN) {
-      return YIN
+    if (line === CX.MOVING_YIN) {
+      return CX.YIN
     }
-    if (line === MOVING_YANG) {
-      return YANG
+    if (line === CX.MOVING_YANG) {
+      return CX.YANG
     }
     return line
   })
@@ -90,11 +86,11 @@ function removeMovingLines (lines) {
 
 function transformMovingLines (lines) {
   return lines.map(function (line) {
-    if (line === MOVING_YIN) {
-      return YANG
+    if (line === CX.MOVING_YIN) {
+      return CX.YANG
     }
-    if (line === MOVING_YANG) {
-      return YIN
+    if (line === CX.MOVING_YANG) {
+      return CX.YIN
     }
     return line
   })

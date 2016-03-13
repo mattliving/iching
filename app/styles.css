@@ -32,7 +32,12 @@ body {
 .Hexagram {
   margin: 40px;
   height: 100px;
-  width: 80px;
+  width: 90px;
+}
+
+.HexagramTitle {
+  margin-bottom: 8px;
+  text-align: center;
 }
 
 .HexagramLine {
